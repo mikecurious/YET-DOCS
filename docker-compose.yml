@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - VIRTUAL_HOST=api-docs.yet-kenya.com
+      - LETSENCRYPT_HOST=api-docs.yet-kenya.com
+      - LETSENCRYPT_EMAIL=mikkohbrayoh@gmail.com
+      - NODE_ENV=production
+    networks:
+      - proxy
+    restart: unless-stopped
+    command: npm start
+
+networks:
+  proxy:
+    external: true
