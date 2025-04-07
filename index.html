@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yet Kenya Merchant API Documentation</title>
+    <style>
+        :root {
+            --primary: #ffb400;
+            --primary-dark: #e6a200;
+            --dark: #292a2d;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 5px solid var(--primary);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            color: var(--dark);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.5rem;
+            color: var(--dark);
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem;
+            color: var(--dark);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .intro {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+        
+        .endpoint {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .endpoint-header {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .method {
+            background-color: var(--primary);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        
+        .title {
+            margin-left: 1rem;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--light);
+        }
+        
+        .endpoint-content {
+            padding: 1.5rem;
+        }
+        
+        .url {
+            font-family: monospace;
+            background-color: var(--light-gray);
+            padding: 0.5rem;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+            word-break: break-all;
+        }
+        
+        .description {
+            margin-bottom: 1.5rem;
+        }
+        
+        .section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title:before {
+            content: "";
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary);
+            margin-right: 10px;
+        }
+        
+        .params {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        
+        .params th {
+            background-color: var(--dark);
+            color: white;
+            padding: 0.5rem;
+            text-align: left;
+        }
+        
+        .params td {
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .params tr:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+        
+        .code-block {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        pre {
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        
+        .response-example {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 3px;
+            margin: 1rem 0;
+        }
+        
+        .nav {
+            position: sticky;
+            top: 20px;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .nav-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .nav-list {
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-bottom: 0.3rem;
+        }
+        
+        .nav-link {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav {
+                position: static;
+            }
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .badge-get {
+            background-color: #61affe;
+            color: #1a2a3a;
+        }
+        
+        .badge-post {
+            background-color: #49cc90;
+            color: #1a2a3a;
+        }
+        
+        .badge-put {
+            background-color: #fca130;
+            color: #1a2a3a;
+        }
+        
+        .badge-delete {
+            background-color: #f93e3e;
+            color: white;
+        }
+        
+        .tab {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--light-gray);
+            cursor: pointer;
+            border-radius: 3px 3px 0 0;
+            margin-right: 0.5rem;
+        }
+        
+        .tab.active {
+            background-color: var(--primary);
+            color: var(--dark);
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 0 0 3px 3px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tabs {
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .logo {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Yet Kenya Merchant API</h1>
+            <p>Robust and secure API for mobile money and card services</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="grid">
+            <nav class="nav">
+                <div class="nav-title">API Endpoints</div>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#card-payments" class="nav-link">Card Payments</a></li>
+                    <li class="nav-item"><a href="#mobile-payments" class="nav-link">Mobile Payments</a></li>
+                </ul>
+            </nav>
+            
+            <main>
+                <section class="intro">
+                    <p>Yet Kenya Limited offers a robust and secure API designed to facilitate mobile money and card services, including collections and disbursements. The API supports high-volume transactions and provides seamless integration with Mpesa and card networks. Businesses can streamline payment processes, reduce errors, and enhance customer experience.</p>
+                    <p><strong>Please contact Yet Kenya Limited to obtain the baseUrl, username, password, and merchantId.</strong></p>
+                </section>
+                
+                <section id="card-payments">
+                    <h2>Card Payments</h2>
+                    <p>(H2H) card transactions refer to the direct communication between the merchant's system and the payment processor's system without the need for intermediary systems or manual intervention.</p>
+                    
+                    <ul style="margin-bottom: 1.5rem; padding-left: 1.5rem;">
+                        <li>Initiation: Merchant sends transaction details to the payment processor.</li>
+                        <li>Authorization: Processor requests authorization from the card issuer.</li>
+                        <li>Authentication: Cardholder's identity is verified.</li>
+                        <li>Response: Issuer sends approval or decline back to the merchant.</li>
+                        <li>Clearing and Settlement: Approved transactions are processed and settled.</li>
+                        <li>Reconciliation: Merchant and cardholder receive transaction statements.</li>
+                    </ul>
+                    
+                    <p>H2H card transactions are known for their efficiency, security, and ability to handle high volumes of transactions. They are facilitated by secure communication protocols and compliance with industry standards such as PCI DSS (Payment Card Industry Data Security Standard).</p>
+                    
+                    <div class="endpoint">
+                        <div class="endpoint-header">
+                            <span class="method">POST</span>
+                            <span class="title">Initialize Card-to-Card Transfer</span>
+                        </div>
+                        <div class="endpoint-content">
+                            <div class="url">{{baseUrl}}/api/rs/merchant/at/card_h2h_init</div>
+                            <div class="description">
+                                <p>Initialize a card-to-card transfer for a merchant. Provide merchant ID, currency, amount, and callback/redirect URLs.</p>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Request Body</div>
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>merchantId</td>
+                                            <td>string</td>
+                                            <td>The ID of the merchant initiating the transfer.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>currency</td>
+                                            <td>string</td>
+                                            <td>The currency of the transfer.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>amount</td>
+                                            <td>number</td>
+                                            <td>The amount to be transferred.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>externalId</td>
+                                            <td>string</td>
+                                            <td>An external identifier for the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>callbackUrl</td>
+                                            <td>string</td>
+                                            <td>The URL to which the callback response will be sent.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>redirectUrl</td>
+                                            <td>string</td>
+                                            <td>The URL to which the user will be redirected after the transfer.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Example Request</div>
+                                <div class="code-block">
+                                    <pre>{
+  "merchantId": "{{username}}",
+  "currency": "KES",
+  "amount": 5,
+  "externalId": "TestCard",
+  "callbackUrl": "https://example.com/",
+  "redirectUrl": "https://example.com/"
+}</pre>
+                                </div>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Response Schema</div>
+                                <div class="code-block">
+                                    <pre>{
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "The status of the card-to-card transfer initialization."
+    },
+    "transactionId": {
+      "type": "string",
+      "description": "The ID of the transaction."
+    },
+    "message": {
+      "type": "string",
+      "description": "A message providing additional information about the status."
+    }
+  }
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="endpoint">
+                        <div class="endpoint-header">
+                            <span class="method">POST</span>
+                            <span class="title">Verify 3D Secure Eligibility</span>
+                        </div>
+                        <div class="endpoint-content">
+                            <div class="url">{{baseUrl}}/api/rs/merchant/at/card_h2h_check_3ds</div>
+                            <div class="description">
+                                <p>Check if a card is eligible for 3D Secure 2 (3DS2). Provide merchant ID, card number, and capture flag.</p>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Request Body</div>
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>merchantId</td>
+                                            <td>string</td>
+                                            <td>The merchant ID for the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>cardNumber</td>
+                                            <td>string</td>
+                                            <td>The card number to be checked for 3DS2 eligibility.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>capture</td>
+                                            <td>string</td>
+                                            <td>A flag indicating whether to capture the 3DS2 check.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Example Request</div>
+                                <div class="code-block">
+                                    <pre>{
+  "merchantId": "{{username}}",
+  "cardNumber": "5xxxxxxxxxx5",
+  "capture": "{{capture}}"
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="endpoint">
+                        <div class="endpoint-header">
+                            <span class="method">POST</span>
+                            <span class="title">Process Card Payment</span>
+                        </div>
+                        <div class="endpoint-content">
+                            <div class="url">{{baseUrl}}/api/rs/merchant/at/card_h2h_pay</div>
+                            <div class="description">
+                                <p>Process a card-to-card payment for a merchant. Provide card details, including card number, expiry date, security code, and capture flag.</p>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Request Body</div>
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>merchantId</td>
+                                            <td>string</td>
+                                            <td>The merchant ID associated with the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>cardNumber</td>
+                                            <td>string</td>
+                                            <td>The card number of the customer initiating the payment.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>expiryMonth</td>
+                                            <td>string</td>
+                                            <td>The expiration month of the customer's card.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>expiryYear</td>
+                                            <td>string</td>
+                                            <td>The expiration year of the customer's card.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>securityCode</td>
+                                            <td>string</td>
+                                            <td>The security code of the customer's card.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>capture</td>
+                                            <td>string</td>
+                                            <td>Indicates whether the payment should be captured immediately.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Example Request</div>
+                                <div class="code-block">
+                                    <pre>{
+  "merchantId": "{{username}}",
+  "cardNumber": "5xxxxxxxxxxxxxx2",
+  "expiryMonth": "08",
+  "expiryYear": "2024",
+  "securityCode": "8xx",
+  "capture": "{{capture}}"
+}</pre>
+                                </div>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Response Schema</div>
+                                <div class="code-block">
+                                    <pre>{
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "transactionId": {
+      "type": "string"
+    }
+  }
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="endpoint">
+                        <div class="endpoint-header">
+                            <span class="method">POST</span>
+                            <span class="title">Create Card Payment Link</span>
+                        </div>
+                        <div class="endpoint-content">
+                            <div class="url">{{baseUrl}}/api/rs/merchant/at/generate_card_payment_link</div>
+                            <div class="description">
+                                <p>This POST request generates a card payment link for a specified merchant via the Yet Kenya Merchants API. It requires a Bearer Token for authentication and sends transaction details (merchant ID, currency, amount, and external ID) along with callback and redirect URLs. Upon successful execution, a payment link is created, which redirects the customer for payment processing, with callback features available to show the status of the transaction.</p>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Example Request</div>
+                                <div class="code-block">
+                                    <pre>{
+  "merchantId": "{{username}}",
+  "currency": "KES",
+  "amount": 11,
+  "externalId": "Test-roven4",
+  "callbackUrl": "{{partnerCallbackSimulatorUrl}}",
+  "redirectUrl": "{{redirect_url}}"
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="endpoint">
+                        <div class="endpoint-header">
+                            <span class="method">POST</span>
+                            <span class="title">Retrieve Card Transaction Details</span>
+                        </div>
+                        <div class="endpoint-content">
+                            <div class="url">{{baseUrl}}/api/rs/merchant/at/read_transactions</div>
+                            <div class="description">
+                                <p>This POST request retrieves transaction details for a specified merchant via the Yet Kenya Limited Merchants API. It requires a Bearer Token for authentication and sends transaction information (merchant ID, currency, and external ID) in the body. Optional parameters such as transaction status and secure ID can also be included. Callback features are available to provide updates on the status of the transaction.</p>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Example Request</div>
+                                <div class="code-block">
+                                    <pre>{
+    "merchantId": "{{username}}",
+    // "transactionStatus":"COMPLETED",
+    "currency": "KES",
+    "externalId": "Demo1c"
+    // "secureId":"8c808278-3f88-4630-bb17-2658ec4f8877"
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="mobile-payments">
+                    <h2>Mobile Payments</h2>
+                    
+                    <div class="endpoint">
+                        <div class="endpoint-header">
+                            <span class="method">GET</span>
+                            <span class="title">Generate Authentication Token</span>
+                        </div>
+                        <div class="endpoint-content">
+                            <div class="url">{{baseUrl}}/auth/</div>
+                            <div class="description">
+                                <p>Generate an authentication token for secure access. Use the merchant ID and password provided during onboarding.</p>
+                                <p>This is generated by passing the merchantId and the password provided during onboarding.</p>
+                                <p>The token should be base 64 encoded for subsequent requests.</p>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Authentication</div>
+                                <p>Basic authentication with:</p>
+                                <ul style="margin-bottom: 1rem; padding-left: 1.5rem;">
+                                    <li><strong>username</strong>: Your merchant ID</li>
+                                    <li><strong>password</strong>: The password shared during onboarding</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Response Example</div>
+                                <div class="code-block">
+                                    <pre>{
+    "error": false,
+    "message": "Token Success",
+    "accessToken": "2af9ac5ceaa370656c73fecdb5c11f81",
+    "expires": 1743790669,
+    "expiresDate": "04-Apr-2025 18:17:49"
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="endpoint">
+                        <div class="endpoint-header">
+                            <span class="method">POST</span>
+                            <span class="title">Start Mobile Payment</span>
+                        </div>
+                        <div class="endpoint-content">
+                            <div class="url">{{baseUrl}}/process/</div>
+                            <div class="description">
+                                <p>Initiate a mobile payment. Provide merchant ID, currency, amount, payer's phone number, and callback/redirect URLs.</p>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Request Body</div>
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>merchantId</td>
+                                            <td>string</td>
+                                            <td>The merchant ID associated with the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>currency</td>
+                                            <td>string</td>
+                                            <td>The currency of the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>payerPhone</td>
+                                            <td>string</td>
+                                            <td>The phone number where the amount will be deducted from.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>amount</td>
+                                            <td>string</td>
+                                            <td>The amount involved in the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>externalId</td>
+                                            <td>string</td>
+                                            <td>A unique identifier for each transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>callbackUrl</td>
+                                            <td>string</td>
+                                            <td>This is a url from your end that we will call with the result of the payment whether successful or failed.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>redirectUrl</td>
+                                            <td>string</td>
+                                            <td>This is a url on your site where the client will be redirected after a successful/failed payment.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>uniqueExternalId</td>
+                                            <td>bool</td>
+                                            <td>These fields work together to help with payment reconciliation and can help prevent duplicate payments when uniqueExternalId is set to true.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Example Request</div>
+                                <div class="code-block">
+                                    <pre>{
+  "merchantId": "{{username}}",
+  "currency": "KES",
+  "amount": "10.00",
+  "payerPhone": "254xxxxxxx",
+  "externalId": "BJDemo{{$timestamp}}",
+  "callbackUrl": "https://callback.com",
+  "redirectUrl": "https://callback.com",
+  "uniqueExternalId": false
+}</pre>
+                                </div>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Response Example</div>
+                                <div class="code-block">
+                                    <pre>{
+    "error": false,
+    "message": "Success! Follow the mpesa prompt"
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="endpoint">
+                        <div class="endpoint-header">
+                            <span class="method">POST</span>
+                            <span class="title">Retrieve Mobile Transactions</span>
+                        </div>
+                        <div class="endpoint-content">
+                            <div class="url">{{baseUrl}}/deposit-transactions/</div>
+                            <div class="description">
+                                <p>Send a POST request to retrieve mobile transactions. Include the bearer token, merchant ID, and the maximum number of transactions to retrieve in the request body. Optional fields include transaction status, currency, and secure ID where querying for a transaction.</p>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Request Body</div>
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>merchantId</td>
+                                            <td>string</td>
+                                            <td>The merchant ID associated with the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>currency</td>
+                                            <td>string</td>
+                                            <td>The currency of the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>amount</td>
+                                            <td>string</td>
+                                            <td>The amount involved in the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>recipient_phone</td>
+                                            <td>string</td>
+                                            <td>Recipient phone of the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>reff_id</td>
+                                            <td>string</td>
+                                            <td>The external id previously set.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>externalId</td>
+                                            <td>string</td>
+                                            <td>A unique identifier for each transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>transactionStatus</td>
+                                            <td>string</td>
+                                            <td>This is the final status of the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>secureId</td>
+                                            <td>string</td>
+                                            <td>A unique string generated for each transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>maxLimit</td>
+                                            <td>string</td>
+                                            <td>Maximum number of transactions to retrieve.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Example Request</div>
+                                <div class="code-block">
+                                    <pre>{
+    "merchantId": "{{username}}",
+    // "transactionStatus":"success",
+    // "currency":"KES",
+    // "secureId":"2e23bb61-3af5-42c6-89d1-9bf39a13e6d6",
+    // "externalId": "test",
+    "maxLimit": "10"
+}</pre>
+                                </div>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Response Example</div>
+                                <div class="code-block">
+                                    <pre>{
+    "error": false,
+    "message": "success",
+    "data": [
+        {
+            "reff_id": "LnDemo27",
+            "currency": "KES",
+            "recipient_phone": "112731188",
+            "amount": 10,
+            "date_created": "2025-03-05T12:22:37.380927-06:00",
+            "status": "failed",
+            "secure_id": "7ce1e091-f761-419d-b1ad-ee8eb0f6bd10"
+        }
+    ]
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="endpoint">
+                        <div class="endpoint-header">
+                            <span class="method">POST</span>
+                            <span class="title">Transfer Money via Mpesa</span>
+                        </div>
+                        <div class="endpoint-content">
+                            <div class="url">{{baseUrl}}/mobile-send/</div>
+                            <div class="description">
+                                <p>Send a POST request to transfer money to a mobile number via Mpesa. Include the bearer token, merchant ID, currency, amount, recipient's phone number, external ID, and a callback URL in the request body.</p>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Request Body</div>
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>merchantId</td>
+                                            <td>string</td>
+                                            <td>The merchant ID associated with the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>currency</td>
+                                            <td>string</td>
+                                            <td>The currency of the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>amount</td>
+                                            <td>string</td>
+                                            <td>The amount involved in the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>less_amount</td>
+                                            <td>string</td>
+                                            <td>Extra funds needed to complete the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>balance</td>
+                                            <td>string</td>
+                                            <td>The current Payout balance.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>status</td>
+                                            <td>string</td>
+                                            <td>The transaction status.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>reason</td>
+                                            <td>string</td>
+                                            <td>Reason for status</td>
+                                        </tr>
+                                        <tr>
+                                            <td>recipientPhone</td>
+                                            <td>string</td>
+                                            <td>The phone number where the amount will be sent to.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>externalId</td>
+                                            <td>string</td>
+                                            <td>A unique identifier for each transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>callbackUrl</td>
+                                            <td>string</td>
+                                            <td>This is a url from your end that we will call with the result of the payment whether successful or failed.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>uniqueExternalId</td>
+                                            <td>bool</td>
+                                            <td>These fields work together to help with payment reconciliation and can help prevent duplicate payments when uniqueExternalId is set to true.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Example Request</div>
+                                <div class="code-block">
+                                    <pre>{
+  "merchantId": "{{username}}",
+  "currency": "KES",
+  "amount": 10,
+  "recipientPhone": "+254xxxxxxxx",
+  "externalId": "BC{{$timestamp}}",
+  "callbackUrl": "https://webhook.site/9b00a0cb-f8da-4ef3-9632-f4c0ad8f0f28",
+  "uniqueExternalId": false
+}</pre>
+                                </div>
+                            </div>
+                            
+                            <div class="tabs">
+                                <div class="tab active" onclick="switchTab(this, 'response-success')">Success Response</div>
+                                <div class="tab" onclick="switchTab(this, 'response-error')">Error Response</div>
+                            </div>
+                            
+                            <div class="tab-content active" id="response-success">
+                                <div class="code-block">
+                                    <pre>{
+    "error": false,
+    "message": "Accept the service request successfully.",
+    "sid": "067d201b-a025-79c7-8000-b78fb04653a5"
+}</pre>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-content" id="response-error">
+                                <div class="code-block">
+                                    <pre>{
+    "status": "rejected",
+    "reason": "Insufficient funds",
+    "data": [
+        {
+            "balance": 0,
+            "less_amount": 51
+        }
+    ]
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="endpoint">
+                        <div class="endpoint-header">
+                            <span class="method">POST</span>
+                            <span class="title">Retrieve Mobile Money Send Transactions</span>
+                        </div>
+                        <div class="endpoint-content">
+                            <div class="url">{{baseUrl}}/mobile-send-transactions/</div>
+                            <div class="description">
+                                <p>Send a POST request to retrieve mobile money send transactions. Include the bearer token and merchant ID in the request body. Optionally, you can specify the transaction status, currency, and secure ID.</p>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Request Body</div>
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>merchantId</td>
+                                            <td>string</td>
+                                            <td>The merchant ID associated with the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>currency</td>
+                                            <td>string</td>
+                                            <td>The currency of the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>amount</td>
+                                            <td>string</td>
+                                            <td>The amount involved in the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>netAmount</td>
+                                            <td>string</td>
+                                            <td>amount + fees.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>fees</td>
+                                            <td>string</td>
+                                            <td>Charges applied on the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>SPRef</td>
+                                            <td>string</td>
+                                            <td>Unique identifier from the telco for each transaction made.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>balance</td>
+                                            <td>string</td>
+                                            <td>The current payout balance.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>externalId</td>
+                                            <td>string</td>
+                                            <td>A unique identifier for each transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>transactionStatus</td>
+                                            <td>string</td>
+                                            <td>The final status of the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>transactionReport</td>
+                                            <td>string</td>
+                                            <td>The final report of the transaction.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>secureId</td>
+                                            <td>string</td>
+                                            <td>A unique string generated for each transaction.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Example Request</div>
+                                <div class="code-block">
+                                    <pre>{
+    "merchantId": "{{username}}",
+    "transactionStatus": "COMPLETED",
+    "currency": "KES",
+    "secureId": "",
+    "externalId": "test123",
+    "maxLimit": "10"
+}</pre>
+                                </div>
+                            </div>
+                            
+                            <div class="section">
+                                <div class="section-title">Response Example</div>
+                                <div class="code-block">
+                                    <pre>{
+    "error": false,
+    "message": "Success. Max 500 records. Actual 1",
+    "data": [
+        {
+            "transactionStatus": "COMPLETED",
+            "transactionReport": "The service request is processed successfully.",
+            "currency": "KES",
+            "amount": 11,
+            "netAmount": "51.0",
+            "fees": 40,
+            "secureId": "067d20ba-8d65-7cd5-8000-aacd8d2708ec",
+            "recipientPhone": "112549611",
+            "externalId": "BC1741818754",
+            "callbackUrl": "https://webhook.site/9b00a0cb-f8da-4ef3-9632-f4c0ad8f0f28",
+            "transactionDate": "12-03-2025 22:33:13",
+            "transactionDateTimestamp": 1741818793,
+            "SPRef": "TCD0H57SSA"
+        }
+    ]
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Yet Kenya Limited. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
