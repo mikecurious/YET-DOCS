@@ -37,6 +37,19 @@
             padding-bottom: 0.5rem;
         }
 
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
         .endpoint {
             background-color: white;
             border-radius: var(--border-radius);
@@ -110,6 +123,25 @@
 </head>
 <body>
     <h2>Card Payments</h2>
+    <section id="card-payments-intro">
+        <p>Yet-Kenya offers a secure and robust API designed specifically for card payment services. This documentation provides details on how to integrate with our API to enable card payment processing for your business applications.</p>
+        
+        <h3>Key Terms</h3>
+        <ul>
+            <li><strong>BaseUrl:</strong> The base URL for the API (provided separately with credentials).</li>
+            <li><strong>token:</strong> A base64-encoded token used for authorization.</li>
+            <li><strong>CallbackUrl:</strong> A URL from your end that we will call with the result of the payment.</li>
+        </ul>
+        
+        <h3>Integration Process Flow</h3>
+        <ul>
+            <li>Register a merchant account using the registration endpoint.</li>
+            <li>Obtain an access token by authenticating with your credentials.</li>
+            <li>Initiate a payment by calling the initiate endpoint with your callback URL.</li>
+            <li>Redirect the customer to the payment form URL returned in the response.</li>
+            <li>Receive payment notification at your callback URL once the payment is completed.</li>
+        </ul>
+    </section>
     <div class="endpoint" id="card-h2h-init">
         <div class="endpoint-header">
             <span class="method">POST</span>
