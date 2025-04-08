@@ -192,7 +192,17 @@
                     <button class="copy-btn"><i class="fas fa-copy"></i> Copy</button>
                 </div>
                 <div class="description">
-                    <p>Retrieves mobile transactions. Include the bearer token, merchant ID, and the maximum number of transactions to retrieve in the request body. Optional fields include transaction status, currency, and secure ID.</p>
+                    <p>Send a POST request to retrieve mobile transactions. Include the bearer token, merchant ID, and the maximum number of transactions to retrieve in the request body. Optional fields include transaction status, currency, and secure ID when querying for a transaction.</p>
+                    <ul>
+                        <li><strong>merchantId (string):</strong> The merchant ID associated with the transaction.</li>
+                        <li><strong>currency (string):</strong> The currency of the transaction.</li>
+                        <li><strong>amount (string):</strong> The amount involved in the transaction.</li>
+                        <li><strong>recipient_phone (string):</strong> Recipient phone of the transaction.</li>
+                        <li><strong>reff_id (string):</strong> The external ID previously set.</li>
+                        <li><strong>externalId:</strong> A unique identifier for each transaction.</li>
+                        <li><strong>transactionStatus (string):</strong> The final status of the transaction.</li>
+                        <li><strong>secureId (string):</strong> A unique string generated for each transaction.</li>
+                    </ul>
                 </div>
                 <div class="section">
                     <div class="section-title">Request Body</div>
@@ -237,19 +247,33 @@
                     <button class="copy-btn"><i class="fas fa-copy"></i> Copy</button>
                 </div>
                 <div class="description">
-                    <p>Transfers money to a mobile number via Mpesa. Include the bearer token, merchant ID, currency, amount, recipient's phone number, external ID, and a callback URL in the request body.</p>
+                    <p>Send a POST request to transfer money to a mobile number via Mpesa. Include the bearer token, merchant ID, currency, amount, recipient's phone number, external ID, and a callback URL in the request body.</p>
+                    <ul>
+                        <li><strong>merchantId (string):</strong> The merchant ID associated with the transaction.</li>
+                        <li><strong>currency (string):</strong> The currency of the transaction.</li>
+                        <li><strong>amount (string):</strong> The amount involved in the transaction.</li>
+                        <li><strong>less_amount (string):</strong> Extra funds needed to complete the transaction.</li>
+                        <li><strong>balance (string):</strong> The current Payout balance.</li>
+                        <li><strong>status (string):</strong> The transaction status.</li>
+                        <li><strong>reason (string):</strong> Reason for the status.</li>
+                        <li><strong>recipientPhone (string):</strong> The phone number where the amount will be sent to.</li>
+                        <li><strong>externalId:</strong> A unique identifier for each transaction.</li>
+                        <li><strong>callbackUrl (string):</strong> This is a URL from your end that we will call with the result of the payment, whether successful or failed.</li>
+                        <li><strong>redirectUrl (string):</strong> This is a URL on your site where the client will be redirected after a successful/failed payment.</li>
+                        <li><strong>uniqueExternalId (bool):</strong> These fields work together to help with payment reconciliation and can help prevent duplicate payments when uniqueExternalId is set to true.</li>
+                    </ul>
                 </div>
                 <div class="section">
                     <div class="section-title">Request Body</div>
                     <div class="code-block">
                         <pre>{
-  "merchantId": "{{username}}",
-  "currency": "KES",
-  "amount": 10,
-  "recipientPhone": "+254xxxxxxxx",
-  "externalId": "BC{{$timestamp}}",
-  "callbackUrl": "https://webhook.site/9b00a0cb-f8da-4ef3-9632-f4c0ad8f0f28",
-  "uniqueExternalId": false
+    "merchantId": "{{username}}",
+    "currency": "KES",
+    "amount": 10,
+    "recipientPhone": "+254xxxxxxxx",
+    "externalId": "BC{{$timestamp}}",
+    "callbackUrl": "https://webhook.site/9b00a0cb-f8da-4ef3-9632-f4c0ad8f0f28",
+    "uniqueExternalId": false
 }</pre>
                     </div>
                 </div>
@@ -277,7 +301,20 @@
                     <button class="copy-btn"><i class="fas fa-copy"></i> Copy</button>
                 </div>
                 <div class="description">
-                    <p>Retrieves mobile money send transactions. Include the bearer token and merchant ID in the request body. Optionally, you can specify the transaction status, currency, and secure ID.</p>
+                    <p>Send a POST request to retrieve mobile money send transactions. Include the bearer token and merchant ID in the request body. Optionally, you can specify the transaction status, currency, and secure ID.</p>
+                    <ul>
+                        <li><strong>merchantId (string):</strong> The merchant ID associated with the transaction.</li>
+                        <li><strong>currency (string):</strong> The currency of the transaction.</li>
+                        <li><strong>amount (string):</strong> The amount involved in the transaction.</li>
+                        <li><strong>netAmount (string):</strong> The total amount including fees.</li>
+                        <li><strong>fees (string):</strong> Charges applied on the transaction.</li>
+                        <li><strong>SPRef (string):</strong> Unique identifier from the telco for each transaction made.</li>
+                        <li><strong>balance (string):</strong> The current Payout balance.</li>
+                        <li><strong>externalId:</strong> A unique identifier for each transaction.</li>
+                        <li><strong>transactionStatus (string):</strong> The final status of the transaction.</li>
+                        <li><strong>transactionReport (string):</strong> The final report of the transaction.</li>
+                        <li><strong>secureId (string):</strong> A unique string generated for each transaction.</li>
+                    </ul>
                 </div>
                 <div class="section">
                     <div class="section-title">Request Body</div>
