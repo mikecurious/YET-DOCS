@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fb;
+            color: #1a1b1d;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #1a1b1d;
+            border-bottom: 3px solid #ffb400;
+            padding-bottom: 0.5rem;
+        }
+        p {
+            margin-bottom: 1.2rem;
+        }
+        ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <section id="introduction" class="intro">
+        <h2>Introduction</h2>
+        <p>Welcome to the Yet Kenya Merchant API documentation. This API enables businesses to facilitate mobile money and card services, including collections and disbursements. With our API, you can seamlessly integrate payment processing capabilities into your applications.</p>
+        <p>Yet Kenya Limited offers a robust and secure API designed to facilitate mobile money and card services, including collections and disbursements. By integrating with Mpesa and card networks, the API provides businesses with a seamless and efficient way to manage their financial transactions. This integration allows businesses to handle payments, refunds, and other financial operations directly through the Mpesa platform, ensuring fast, reliable, and secure transactions. The API is built to support high-volume transactions, making it ideal for businesses that rely on mobile money as a core part of their operations.</p>
+        <p>With the Yet Kenya API, businesses can streamline their payment processes, reduce manual errors, and enhance the overall customer experience by leveraging the widespread and trusted Mobile Money Technologies in Kenya.</p>
+        <p><em>*Please reach out to Yet Kenya Limited to obtain the baseUrl, username, password, and merchantId.</em></p>
+        
+        <h3>Definition of Terms</h3>
+        <ul>
+            <li><strong>baseUrl:</strong> The base URL for the API. Will be provided along with credentials.</li>
+            <li><strong>token:</strong> A base64-encoded token used for authorization.</li>
+            <li><strong>username:</strong> The username provided separately for authentication.</li>
+            <li><strong>password:</strong> The password provided separately for authentication.</li>
+            <li><strong>token_clear:</strong> A placeholder for a clear token, used in authentication or session management.</li>
+            <li><strong>externalId:</strong> This is a unique ID provided by your end to track each individual transaction.</li>
+            <li><strong>callbackUrl:</strong> This is a URL from your end that we will call with the result of the payment, whether successful or failed.</li>
+            <li><strong>redirectUrl:</strong> This is a URL on your site where the client will be redirected after a successful/failed payment.</li>
+            <li><strong>amount:</strong> The amount to be transacted.</li>
+            <li><strong>recipientPhone:</strong> The recipient's phone number. The phone number must include the country code.</li>
+            <li><strong>currency:</strong> The currency of the transaction.</li>
+            <li><strong>cardNumber:</strong> The card number used.</li>
+            <li><strong>expiryMonth:</strong> The expiration month of the card.</li>
+            <li><strong>expiryYear:</strong> The expiration year of the card.</li>
+            <li><strong>securityCode:</strong> The security code of the customer's card.</li>
+            <li><strong>capture:</strong> A flag indicating whether to capture the 3DS2 check.</li>
+            <li><strong>merchantId:</strong> The ID of the merchant initiating the transfer.</li>
+            <li><strong>payerPhone:</strong> The phone number involved in the request.</li>
+        </ul>
+    </section>
+</body>
+</html>
