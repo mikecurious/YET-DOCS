@@ -69,10 +69,15 @@
             background-color: var(--dark);
             color: white;
             padding: 1rem;
-            display: flex;
-            justify-content: space-between;
+            display: flex;         
             align-items: center;
             cursor: pointer;
+            gap: 1rem;
+        }
+
+        .endpoint-header > div {
+           display: flex;
+           align-items: center;
         }
 
         .method {
@@ -81,6 +86,10 @@
             padding: 0.4rem 1rem;
             border-radius: var(--border-radius);
             font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+         .endpoint-header .endpoint-title {
             font-size: 0.9rem;
         }
 
@@ -144,14 +153,17 @@
     </section>
     <div class="endpoint" id="card-h2h-init">
         <div class="endpoint-header">
-            <span class="method">POST</span>
-            <span>Initiate Card H2H</span>
+            <div>
+              <span class="method">POST</span>
+              <span class="endpoint-title">Initiate Card H2H</span>
+            </div>
         </div>
         <div class="endpoint-content">
             <div class="url">{{baseUrl}}/api/rs/merchant/at/card_h2h_init</div>
             <div class="description">
-                <p>Initialize a card-to-card transfer for a merchant.</p>
+                <p>Initializes a card-to-card payment. This endpoint prepares the payment process and returns a <code>paymentUrl</code> for the customer to complete the payment.</p>
             </div>
+            <h4>Request</h4>
             <div class="code-block">
                 <pre>{
     "merchantId": "{{username}}",
@@ -161,6 +173,148 @@
     "callbackUrl": "https://example.com/",
     "redirectUrl": "https://example.com/"
 }</pre>
+            </div>
+            <h4>Response</h4>
+            <div class="code-block">
+                <pre>{
+    "message": "Successful",
+    "paymentUrl": "https://payment.url.com/abc",
+    "reference": "ABC12345"
+}</pre>
+            </div>
+        </div>
+    </div>
+    <div class="endpoint" id="check-3ds">
+        <div class="endpoint-header">
+            <div>
+               <span class="method">POST</span>
+               <span class="endpoint-title">Check 3DS</span>
+            </div>
+        </div>
+        <div class="endpoint-content">
+            <div class="url">{{baseUrl}}/api/rs/merchant/at/check_3ds</div>
+            <div class="description">
+                <p>Checks if 3DS (3D Secure) authentication is required for a given payment. This step is crucial for secure card transactions.</p>
+            </div>
+            <h4>Request</h4>
+            <div class="code-block">
+                <pre>{
+    "merchantId": "{{username}}",
+    "reference": "ABC12345"
+}</pre>
+            </div>
+            <h4>Response</h4>
+            <div class="code-block">
+                <pre>{
+    "status": "FAILED",
+    "message": "3DS failed/not required",
+    "reference": "ABC12345",
+    "paReq": "",
+    "acsUrl": ""
+}</pre>
+            </div>
+        </div>
+    </div>
+    <div class="endpoint" id="attempt-payment">
+        <div class="endpoint-header">
+            <div>
+               <span class="method">POST</span>
+               <span class="endpoint-title">Attempt Payment</span>
+            </div>
+        </div>
+        <div class="endpoint-content">
+            <div class="url">{{baseUrl}}/api/rs/merchant/at/payment_attempt</div>
+            <div class="description">
+                <p>Attempts to process the payment. This endpoint is used after the card details have been collected and optionally after the 3DS check.</p>
+            </div>
+            <h4>Request</h4>
+            <div class="code-block">
+                <pre>{
+    "merchantId": "{{username}}",
+    "reference": "ABC12345",
+    "paRes": "",
+    "cardToken": ""
+}</pre>
+            </div>
+            <h4>Response</h4>
+            <div class="code-block">
+                <pre>{
+    "status": "SUCCESS",
+    "message": "Payment successful",
+    "reference": "ABC12345",
+    "externalId": "TestCard",
+    "amount": "5"
+}</pre>
+            </div>
+        </div>
+    </div>
+    <div class="endpoint" id="generate-payment-link">
+        <div class="endpoint-header">
+            <div>
+               <span class="method">POST</span>
+               <span class="endpoint-title">Generate Card Payment Link</span>
+            </div>
+        </div>
+        <div class="endpoint-content">
+            <div class="url">{{baseUrl}}/api/rs/merchant/at/payment_link</div>
+            <div class="description">
+                <p>Generates a payment link for card transactions. This link can be shared with the customer to initiate a payment.</p>
+            </div>
+            <h4>Request</h4>
+            <div class="code-block">
+                <pre>{
+    "merchantId": "{{username}}",
+    "currency": "KES",
+    "amount": 5,
+    "externalId": "TestCard",
+    "callbackUrl": "https://example.com/",
+    "redirectUrl": "https://example.com/",
+    "cardHolderName": "John Doe",
+    "email": "john.doe@example.com"
+}</pre>
+            </div>
+            <h4>Response</h4>
+            <div class="code-block">
+                <pre>{
+    "message": "Successful",
+    "paymentUrl": "https://payment.url.com/xyz",
+    "reference": "XYZ67890"
+}</pre>
+            </div>
+        </div>
+    </div>
+    <div class="endpoint" id="read-transaction">
+        <div class="endpoint-header">
+            <div>
+              <span class="method">GET</span>
+              <span class="endpoint-title">Read Transaction Card</span>
+            </div>
+        </div>
+        <div class="endpoint-content">
+            <div class="url">{{baseUrl}}/api/rs/merchant/at/transaction_card</div>
+            <div class="description">
+                <p>Retrieves details of a specific card transaction. This endpoint is useful for tracking and managing transactions.</p>
+            </div>
+            <h4>Request</h4>
+            <div class="code-block">
+                <pre>{
+    "merchantId": "{{username}}",
+    "reference": "XYZ67890"
+}</pre>
+            </div>
+            <h4>Response</h4>
+            <div class="code-block">
+                <pre>{
+    "status": "SUCCESS",
+    "message": "Transaction found",
+    "reference": "XYZ67890",
+    "externalId": "TestCard",
+    "amount": "5"
+}</pre>
+            </div>
+            <div class="code-block">
+                <pre>{
+                }</pre>
             </div>
         </div>
     </div>
