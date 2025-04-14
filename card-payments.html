@@ -69,10 +69,15 @@
             background-color: var(--dark);
             color: white;
             padding: 1rem;
-            display: flex;
-            justify-content: space-between;
+            display: flex;         
             align-items: center;
             cursor: pointer;
+            gap: 1rem;
+        }
+
+        .endpoint-header > div {
+           display: flex;
+           align-items: center;
         }
 
         .method {
@@ -81,6 +86,10 @@
             padding: 0.4rem 1rem;
             border-radius: var(--border-radius);
             font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+         .endpoint-header .endpoint-title {
             font-size: 0.9rem;
         }
 
@@ -144,8 +153,10 @@
     </section>
     <div class="endpoint" id="card-h2h-init">
         <div class="endpoint-header">
-            <span class="method">POST</span>
-            <span>Initiate Card H2H</span>
+            <div>
+              <span class="method">POST</span>
+              <span class="endpoint-title">Initiate Card H2H</span>
+            </div>
         </div>
         <div class="endpoint-content">
             <div class="url">{{baseUrl}}/api/rs/merchant/at/card_h2h_init</div>
@@ -175,8 +186,10 @@
     </div>
     <div class="endpoint" id="check-3ds">
         <div class="endpoint-header">
-            <span class="method">POST</span>
-            <span>Check 3DS</span>
+            <div>
+               <span class="method">POST</span>
+               <span class="endpoint-title">Check 3DS</span>
+            </div>
         </div>
         <div class="endpoint-content">
             <div class="url">{{baseUrl}}/api/rs/merchant/at/check_3ds</div>
@@ -204,8 +217,10 @@
     </div>
     <div class="endpoint" id="attempt-payment">
         <div class="endpoint-header">
-            <span class="method">POST</span>
-            <span>Attempt Payment</span>
+            <div>
+               <span class="method">POST</span>
+               <span class="endpoint-title">Attempt Payment</span>
+            </div>
         </div>
         <div class="endpoint-content">
             <div class="url">{{baseUrl}}/api/rs/merchant/at/payment_attempt</div>
@@ -235,8 +250,10 @@
     </div>
     <div class="endpoint" id="generate-payment-link">
         <div class="endpoint-header">
-            <span class="method">POST</span>
-            <span>Generate Card Payment Link</span>
+            <div>
+               <span class="method">POST</span>
+               <span class="endpoint-title">Generate Card Payment Link</span>
+            </div>
         </div>
         <div class="endpoint-content">
             <div class="url">{{baseUrl}}/api/rs/merchant/at/payment_link</div>
@@ -268,8 +285,10 @@
     </div>
     <div class="endpoint" id="read-transaction">
         <div class="endpoint-header">
-            <span class="method">GET</span>
-            <span>Read Transaction Card</span>
+            <div>
+              <span class="method">GET</span>
+              <span class="endpoint-title">Read Transaction Card</span>
+            </div>
         </div>
         <div class="endpoint-content">
             <div class="url">{{baseUrl}}/api/rs/merchant/at/transaction_card</div>
@@ -309,3 +328,4 @@
     </script>
 </body>
 </html>
+ 
