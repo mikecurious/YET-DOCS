@@ -1,8 +1,10 @@
+FROM node:18-alpine as build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
 FROM nginx:alpine
-
-COPY . /usr/share/nginx/html
-
-# Optional: custom nginx config for SPA/history fallback, etc.
-# COPY nginx.conf /etc/nginx/nginx.conf
-
+COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
