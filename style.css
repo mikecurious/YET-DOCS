@@ -1,0 +1,289 @@
+:root {
+    --primary: #ffb400;
+    --primary-light: #ffe0a3;
+    --primary-dark: #e09500;
+    --primary-darker: #b87800;
+    --dark: #1a1b1d;
+    --light: #f8f9fa;
+    --gray: #6c757d;
+    --light-gray: #e9ecef;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #f8f9fb;
+    color: var(--dark);
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+header {
+    background-color: var(--dark);
+    color: white;
+    padding: 0.8rem 0;
+    text-align: center;
+    border-bottom: 5px solid var(--primary);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,180,0,0.2) 0%, rgba(255,180,0,0) 70%);
+    z-index: 1;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2rem;
+    margin: 2.5rem 0 1rem;
+    color: var(--dark);
+    border-bottom: 3px solid var(--primary);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin: 1.8rem 0 0.8rem;
+    color: var(--dark);
+}
+
+h4 {
+    font-size: 1.2rem;
+    margin: 1.2rem 0 0.6rem;
+    color: var(--dark);
+}
+
+p {
+    margin-bottom: 1.2rem;
+}
+
+.intro {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin: 2rem 0;
+    border-left: 4px solid var(--primary);
+}
+
+.endpoint {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid var(--light-gray);
+}
+
+.endpoint:hover {
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.endpoint-header {
+    background-color: var(--dark);
+    color: white;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.method {
+    background-color: var(--primary);
+    color: var(--dark);
+    padding: 0.4rem 1rem;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.method i {
+    font-size: 0.8rem;
+}
+
+.title {
+    margin-left: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--light);
+    flex-grow: 1;
+}
+
+.endpoint-content {
+    padding: 2rem;
+    display: none;
+}
+
+.endpoint-content.active {
+    display: block;
+}
+
+.url {
+    font-family: 'Consolas', monospace;
+    background-color: #f1f3f5;
+    padding: 0.8rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+    word-break: break-all;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.url-text {
+    flex-grow: 1;
+}
+
+.copy-btn {
+    background-color: var(--primary);
+    color: var(--dark);
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.copy-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+.description {
+    margin-bottom: 1.8rem;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border-left: 3px solid var(--primary);
+}
+
+.section {
+    margin-bottom: 2rem;
+}
+
+.section:last-child {
+    margin-bottom: 0;
+}
+
+.section-title {
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.section-title:before {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary);
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.code-block {
+    background-color: #272822;
+    border-radius: var(--border-radius);
+    padding: 1.2rem;
+    margin: 1.2rem 0;
+    overflow-x: auto;
+    position: relative;
+    color: #f8f8f2;
+    font-family: 'Consolas', monospace;
+    font-size: 0.9rem;
+}
+
+footer {
+    background-color: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+.logo {
+    font-weight: bold;
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-link:hover {
+    background-color: var(--primary);
+    color: var(--dark);
+    transform: translateY(-3px);
+}
+
+/* ...add any other styles from your previous HTML files here... */
