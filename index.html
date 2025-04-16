@@ -40,9 +40,9 @@
         header {
             background-color: var(--dark);
             color: white;
-            padding: 0.2rem 0; /* Reduced from 0.3rem */
+            padding: 0.5rem 0; /* Reduced from 0.8rem */
             text-align: center;
-            border-bottom: 3px solid var(--primary); /* Reduced from 5px */
+            border-bottom: 5px solid var(--primary);
             position: relative;
             overflow: hidden;
         }
@@ -70,8 +70,8 @@
         }
         
         h1 {
-            font-size: 2.5rem; /* Reduced from 2.8rem */
-            margin-bottom: 0.5rem; /* Reduced from 1rem */
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
             font-weight: 700;
         }
         
@@ -484,8 +484,8 @@
             background-color: var(--dark);
             color: white;
             text-align: center;
-            padding: 0.1rem 0; /* Reduced from 0.2rem */
-            margin-top: 0.5rem; /* Reduced from 1rem */
+            padding: 0.3rem 0; /* Reduced from 0.5rem */
+            margin-top: 2rem;
         }
         
         .logo {
@@ -496,16 +496,193 @@
             display: inline-block;
         }
         
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary);
+            color: var(--dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            background-color: var(--primary-dark);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+            transform: scale(1.05);
+        }
+        
+        /* Authentication section */
+        .auth-banner {
+            background-color: #e9f7ef;
+            border-left: 4px solid #28a745;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: var(--border-radius);
+        }
+        
+        .auth-title {
+            font-weight: 600;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Quick links */
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .quick-link {
+            padding: 1rem 1.5rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-decoration: none;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .quick-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            color: var(--primary-dark);
+        }
+        
+        .quick-link i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        /* Helper classes */
+        .text-primary {
+            color: var(--primary-dark);
+        }
+        
+        .mt-4 {
+            margin-top: 2rem;
+        }
+        
+        .mb-4 {
+            margin-bottom: 2rem;
+        }
+        
+        /* Search bar */
+        .search-container {
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255,180,0,0.2);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        /* Method badges */
+        .method-get {
+            background-color: #61affe;
+        }
+        
+        .method-post {
+            background-color: #49cc90;
+        }
+        
+        .method-put {
+            background-color: #fca130;
+        }
+        
+        .method-delete {
+            background-color: #f93e3e;
+            color: white;
+        }
+        
+        /* Status codes */
+        .status-code {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+        
+        .status-200 {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-400 {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-500 {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* Footer styling */
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
         .footer-links {
             display: flex;
-            gap: 1rem; /* Reduced from 2rem */
-            margin: 0.5rem 0; /* Reduced from 1rem */
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+        
+        .footer-link {
+            color: #a6a6a6;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-link:hover {
+            color: var(--primary);
         }
         
         .social-links {
             display: flex;
             gap: 1rem;
-            margin-top: 0.5rem; /* Reduced from 1rem */
+            margin-top: 1rem;
         }
         
         .social-link {
