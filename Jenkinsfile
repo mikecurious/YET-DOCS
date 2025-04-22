@@ -1,48 +1,36 @@
 pipeline {
     agent any
     
-    environment {
-        PROJECT_DIR = '/home/yet-kenya/yet-docs'  // ← Explicit project directory
-    }
-    
     stages {
+        // Stage 1: Jenkins automatically clones into its workspace
         stage('Checkout') {
             steps {
-                dir(env.PROJECT_DIR) {  // ← All operations in your project dir
-                    git branch: 'master', 
-                    url: 'https://github.com/mikecurious/YET-DOCS.git'
-                }
+                git(
+                    branch: 'your-branch-name',  // e.g., 'main' or 'master'
+                    url: 'https://github.com/mikecurious/YET-DOCS.git',
+                    credentialsId: 'your-github-credentials',  // Create in Jenkins
+                    poll: true  // Enable polling for changes
+                )
             }
         }
         
-        stage('Build Docker Image') {
+        // Stage 2: Build Docker image (using files in Jenkins workspace)
+        stage('Build') {
             steps {
-                dir(env.PROJECT_DIR) {
-                    script {
-                        // Debug: List files to verify location
-                        sh 'ls -la'
-                        
-                        // Build with compose (using absolute path)
-                        sh "docker compose -f ${env.PROJECT_DIR}/docker-compose.yml build"
-                    }
-                }
+                sh 'ls -la'  // Verify files exist
+                sh 'docker compose build'
             }
         }
         
+        // Stage 3: Deploy
         stage('Deploy') {
             steps {
-                dir(env.PROJECT_DIR) {
-                    script {
-                        sh 'docker compose up -d'  // Full deployment command
-                    }
-                }
-            }
-        }
+        sh '''
+            cp -r * /home/yet-kenya/yet-docs/
+            cd /home/yet-kenya/yet-docs
+            docker compose up -d --build
+        '''
     }
-    
-    post {
-        always {
-            echo "Pipeline completed - ${currentBuild.result}"
         }
     }
 }
