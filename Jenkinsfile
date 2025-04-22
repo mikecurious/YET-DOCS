@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'YOUR_REPO_URL', branch: 'master'
+                git url: 'https://github.com/mikecurious/YET-DOCS ', branch: 'master'
             }
         }
 
