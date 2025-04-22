@@ -24,14 +24,11 @@ pipeline {
         
         // Stage 3: Deploy
         stage('Deploy') {
-            steps {
+    steps {
         sh '''
-            sudo mkdir -p /home/yet-kenya/yet-docs/
-            sudo cp -r * /home/yet-kenya/yet-docs/
-            cd /home/yet-kenya/yet-docs
-            sudo docker compose up -d --build
+            docker compose up -d --build
         '''
     }
-        }
-    }
 }
+    }
+}   
