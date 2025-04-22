@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   docs:
     build:
@@ -12,6 +10,9 @@ services:
       - LETSENCRYPT_EMAIL=brian@hudumacitypay.com
     expose:
       - "80"
+    ports:
+      - "8077:80"
+
     networks:
       - proxy
 
