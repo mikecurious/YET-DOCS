@@ -1,52 +1,58 @@
 pipeline {
     agent any
-    
+
+    // Add webhook trigger configuration
     triggers {
-        githubPush()  // This enables GitHub webhook integration
+        githubPush()
     }
-    
+
     stages {
-        // Stage 1: Jenkins automatically clones into its workspace
         stage('Checkout') {
             steps {
                 git(
-                    branch: 'main', 
+                    branch: 'main',
                     url: 'https://github.com/mikecurious/YET-DOCS.git',
-                    credentialsId: 'bb4d7a16-5f22-45c6-82aa-15fab7c611bb',  // Your GitHub credentials ID
-                    poll: true  // Enable polling for changes
+                    credentialsId: 'bb4d7a16-5f22-45c6-82aa-15fab7c611bb',  // Your existing PAT credential
+                    poll: false  // Disable polling since we're using webhooks
                 )
             }
         }
-        
-        // Stage 2: Build Docker image
+
         stage('Build') {
             steps {
-                sh 'ls -la'  // Verify files exist
-                sh 'docker compose build'
+                sh 'ls -la'
+                // Add --no-cache for clean builds when needed
+                sh 'docker compose build --no-cache'
             }
         }
-        
-        // Stage 3: Deploy
+
         stage('Deploy') {
             steps {
+                // Force recreate containers and ignore orphaned containers
+                sh 'docker compose up -d --force-recreate --remove-orphans'
+                
+                // Optional: Clean up old containers/images
                 sh '''
-                    # Stop and remove existing container if it exists
-                    docker compose down || true
-                    
-                    # Start with build
-                    docker compose up -d --build
+                    docker system prune -f || true
+                    docker image prune -af || true
                 '''
             }
         }
     }
-    
-    // Optional: Post-build actions
+
+    // Add post-build notifications
     post {
         success {
-            echo 'Deployment successful!'
+            slackSend(
+                color: 'good',
+                message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+            )
         }
         failure {
-            echo 'Deployment failed. Check logs for details.'
+            slackSend(
+                color: 'danger',
+                message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+            )
         }
     }
 }
