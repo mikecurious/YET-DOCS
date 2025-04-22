@@ -1,5 +1,13 @@
+// 
+
 pipeline {
     agent any
+    
+    // Simple custom variables
+    environment {
+        APP_NAME = "YET-DOCS"
+        TEAM_EMAIL = "mikkohbrayoh@gmail.com"
+    }
     
     stages {
         stage('Checkout') {
@@ -37,9 +45,29 @@ pipeline {
         }
         success {
             echo "Build succeeded!"
+            emailext (
+                subject: "Success: ${env.APP_NAME} Build #${env.BUILD_NUMBER}",
+                body: """
+                <p>Build succeeded: ${env.APP_NAME}</p>
+                <p>Commit by: ${env.CHANGE_AUTHOR ?: 'Unknown'}</p>
+                <p>Build URL: <a href='${env.BUILD_URL}'>${env.BUILD_URL}</a></p>
+                """,
+                to: "${env.TEAM_EMAIL}",
+                mimeType: 'text/html'
+            )
         }
         failure {
             echo "Build failed!"
+            emailext (
+                subject: "Failed: ${env.APP_NAME} Build #${env.BUILD_NUMBER}",
+                body: """
+                <p>Build failed: ${env.APP_NAME}</p>
+                <p>Commit by: ${env.CHANGE_AUTHOR ?: 'Unknown'}</p>
+                <p>Build URL: <a href='${env.BUILD_URL}'>${env.BUILD_URL}</a></p>
+                """,
+                to: "${env.TEAM_EMAIL}",
+                mimeType: 'text/html'
+            )
         }
     }
 }
