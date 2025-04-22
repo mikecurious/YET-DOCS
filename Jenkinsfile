@@ -9,7 +9,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                echo 'Files already in workspace, skipping checkout'
+                // OR completely remove this stage
             }
         }
 
