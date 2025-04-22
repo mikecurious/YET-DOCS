@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: yet-docs
     environment:
-      - VIRTUAL_HOST=dapi-ocs.yet-kenya.com
+      - VIRTUAL_HOST=api-docs.yet-kenya.com
       - LETSENCRYPT_HOST=api-docs.yet-kenya.com
       - LETSENCRYPT_EMAIL=brian@hudumacitypay.com
     expose:
