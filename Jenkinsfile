@@ -1,37 +1,25 @@
 pipeline {
     agent any
-
+    
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/mikecurious/YET-DOCS ', branch: 'master'
+                git 'https://github.com/mikecurious/YET-DOCS'
             }
         }
-
+        
         stage('Build Docker Image') {
             steps {
-                script {
-                    sh 'ls -la'
+                dir('/home/yet-kenya/yet-docs') {  // ← Add this line to change working directory
                     sh 'docker compose -f docker-compose.yml build'
                 }
             }
         }
-
+        
         stage('Deploy') {
             steps {
-                script {
-                    sh 'docker compose -f docker-compose.yml up -d'
-                }
+                // Your deployment steps
             }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline finished.'
-        }
-        failure {
-            echo 'Build or deployment failed.'
         }
     }
 }
