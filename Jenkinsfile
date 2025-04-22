@@ -16,7 +16,11 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker compose build'  // Note: space instead of hyphen
+                    // List files to debug
+                    sh 'ls -la'
+                    
+                    // Use -f flag to specify the docker-compose file location
+                    sh 'docker compose -f ${DOCKER_COMPOSE_FILE} build'
                 }
             }
         }
@@ -24,7 +28,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'docker compose up -d'  // Note: space instead of hyphen
+                    sh 'docker compose -f ${DOCKER_COMPOSE_FILE} up -d'
                 }
             }
         }
