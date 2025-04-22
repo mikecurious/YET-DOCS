@@ -6,7 +6,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git(
-                    branch: 'your-branch-name',  // e.g., 'main' or 'master'
+                    branch: 'main',
                     url: 'https://github.com/mikecurious/YET-DOCS.git',
                     credentialsId: 'your-github-credentials',  // Create in Jenkins
                     poll: true  // Enable polling for changes
