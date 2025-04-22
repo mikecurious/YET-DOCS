@@ -8,7 +8,7 @@ pipeline {
                 git(
                     branch: 'main',
                     url: 'https://github.com/mikecurious/YET-DOCS.git',
-                    credentialsId: 'your-github-credentials',  // Create in Jenkins
+                    credentialsId: 'bb4d7a16-5f22-45c6-82aa-15fab7c611bb',  // Create in Jenkins
                     poll: true  // Enable polling for changes
                 )
             }
