@@ -26,9 +26,10 @@ pipeline {
         stage('Deploy') {
             steps {
         sh '''
-            cp -r * /home/yet-kenya/yet-docs/
+            sudo mkdir -p /home/yet-kenya/yet-docs/
+            sudo cp -r * /home/yet-kenya/yet-docs/
             cd /home/yet-kenya/yet-docs
-            docker compose up -d --build
+            sudo docker compose up -d --build
         '''
     }
         }
