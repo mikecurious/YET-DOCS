@@ -1,26 +1,18 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
-        PROJECT_DIR = "${WORKSPACE}"
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                echo 'Files already in workspace, skipping checkout'
+                git url: 'YOUR_REPO_URL', branch: 'master'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    // List files to debug
                     sh 'ls -la'
-                    
-                    // Use -f flag to specify the docker-compose file location
-                    sh 'docker compose -f ${DOCKER_COMPOSE_FILE} build'
+                    sh 'docker compose -f docker-compose.yml build'
                 }
             }
         }
@@ -28,7 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'docker compose -f ${DOCKER_COMPOSE_FILE} up -d'
+                    sh 'docker compose -f docker-compose.yml up -d'
                 }
             }
         }
