@@ -6,7 +6,7 @@ pipeline {
     // Simple custom variables
     environment {
         APP_NAME = "YET-DOCS"
-        TEAM_EMAIL = "mikkohbrayoh@gmail.com"
+        TEAM_EMAIL = "brian@hudumacitypay.com"
     }
     
     stages {
