@@ -4,8 +4,6 @@ pipeline {
     environment {
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
         PROJECT_DIR = "${WORKSPACE}"
-        // You might need to update this path to match your system
-        DOCKER_COMPOSE = "/usr/local/bin/docker-compose"
     }
 
     stages {
@@ -18,7 +16,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh '${DOCKER_COMPOSE} build'
+                    sh 'docker compose build'  // Note: space instead of hyphen
                 }
             }
         }
@@ -26,7 +24,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh '${DOCKER_COMPOSE} up -d'
+                    sh 'docker compose up -d'  // Note: space instead of hyphen
                 }
             }
         }
