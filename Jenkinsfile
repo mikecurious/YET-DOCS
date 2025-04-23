@@ -34,7 +34,6 @@ pipeline {
                             -Dsonar.login=${SONAR_TOKEN}
                         """
                     }
-                    echo "Access report at: https://sonar.yet-kenya.com/dashboard?id=${APP_NAME}"
                 }
             }
         }
