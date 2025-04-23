@@ -8,21 +8,22 @@ pipeline {
         SONARQUBE = 'yet-sonarcube' 
     }
 
-    tools {
-        sonarScanner 'sonar-jenkins' 
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'bb4d7a16-5f22-45c6-82aa-15fab7c611bb', url: 'https://github.com/mikecurious/YET-DOCS.git', branch: 'main'
+                git credentialsId: 'bb4d7a16-5f22-45c6-82aa-15fab7c611bb', 
+                    url: 'https://github.com/mikecurious/YET-DOCS.git', 
+                    branch: 'main'
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv("${env.SONARQUBE}") {
-                    sh 'sonar-scanner'
+                script {
+                    def scannerHome = tool name: 'sonar-jenkins', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    withSonarQubeEnv("${env.SONARQUBE}") {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
                 }
             }
         }
@@ -69,4 +70,3 @@ pipeline {
         }
     }
 }
-  
