@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     environment {
         APP_NAME = "YET-DOCS"
         TEAM_EMAIL = "brian@hudumacitypay.com"
@@ -19,7 +19,7 @@ pipeline {
                 )
             }
         }
-        
+
         stage('SonarQube Analysis') {
             steps {
                 withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_TOKEN')]) {
@@ -34,27 +34,45 @@ pipeline {
                             -Dsonar.login=${SONAR_TOKEN}
                         """
                     }
+                    echo "Access report at: https://sonar.yet-kenya.com/dashboard?id=${APP_NAME}"
                 }
             }
         }
-        
+
         stage('Unit Tests') {
             steps {
                 echo '🧪 Running unit tests...'
                 sh 'echo "Tests would run here"'
             }
         }
-        
+
         stage('Build Docker Image') {
             steps {
                 echo '🔨 Building Docker image...'
                 sh 'docker compose build --no-cache'
             }
         }
-        
-        stage('Push to Docker Registry') {
+
+        stage('Push to GitHub Registry') {
             steps {
-                echo '📦 Pushing to Docker registry...'
+                echo '📦 Pushing to GitHub Container Registry...'
+                withCredentials([usernamePassword(
+                    credentialsId: 'github-cr',
+                    usernameVariable: 'GH_USER',
+                    passwordVariable: 'GH_TOKEN'
+                )]) {
+                    sh """
+                        echo "Logging into GHCR..."
+                        echo "${GH_TOKEN}" | docker login ghcr.io -u "${GH_USER}" --password-stdin
+                        docker compose push
+                    """
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo '🚀 Deploying Docker containers...'
                 sh '''
                     docker compose up -d --force-recreate --remove-orphans
                     docker system prune -f || true
@@ -63,7 +81,7 @@ pipeline {
             }
         }
     }
-    
+
     post {
         always {
             echo '📦 Pipeline finished.'
