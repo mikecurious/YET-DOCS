@@ -17,6 +17,13 @@ pipeline {
                     credentialsId: 'bb4d7a16-5f22-45c6-82aa-15fab7c611bb',
                     poll: true
                 )
+                script {
+                    // Extract commit information after checkout
+                    env.GIT_COMMIT_MSG = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
+                    env.GIT_AUTHOR = sh(script: 'git log -1 --pretty=%an', returnStdout: true).trim()
+                    env.GIT_AUTHOR_EMAIL = sh(script: 'git log -1 --pretty=%ae', returnStdout: true).trim()
+                    env.GIT_COMMIT_SHA = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                }
             }
         }
 
@@ -42,7 +49,47 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 echo '🧪 Running unit tests...'
-                sh 'echo "Tests would run here"'
+                
+                // Basic HTML validation checks
+                sh '''
+                    echo "Checking for valid HTML files..."
+                    # Check if any HTML files exist first
+                    if [ $(find . -name "*.html" | wc -l) -gt 0 ]; then
+                        # Check for doctype declarations
+                        for file in $(find . -name "*.html"); do
+                            if ! grep -qi "<!DOCTYPE" $file; then
+                                echo "❌ Missing DOCTYPE in $file"
+                                exit 1
+                            fi
+                        done
+                        echo "✅ All HTML files have DOCTYPE declarations"
+                        
+                        # Check for broken internal links
+                        for file in $(find . -name "*.html"); do
+                            echo "Checking links in $file"
+                            grep -o 'href="[^"]*"' $file | grep -v "http" | cut -d'"' -f2 | while read link; do
+                                if [[ $link != "#"* && $link != "" && ! -f "${link#/}" && ! -f "$(dirname $file)/$link" ]]; then
+                                    echo "❌ Broken link in $file: $link"
+                                    exit 1
+                                fi
+                            done
+                        done
+                        echo "✅ All internal links valid"
+                        
+                        # Check image tags have alt attributes
+                        for file in $(find . -name "*.html"); do
+                            if grep -q '<img' $file; then
+                                if grep '<img' $file | grep -v "alt="; then
+                                    echo "❌ Images without alt attributes found in $file"
+                                    exit 1
+                                fi
+                            fi
+                        done
+                        echo "✅ All images have alt attributes"
+                    else
+                        echo "No HTML files found to test"
+                    fi
+                '''
             }
         }
 
@@ -95,7 +142,12 @@ pipeline {
                         body: """
                         <p>Build succeeded: ${env.APP_NAME}</p>
                         <p>Branch: ${env.GIT_BRANCH ?: 'Unknown'}</p>
+                        <p>Commit by: ${env.GIT_AUTHOR ?: 'Unknown'} (${env.GIT_AUTHOR_EMAIL ?: ''})</p>
+                        <p>Commit message: ${env.GIT_COMMIT_MSG ?: 'Unknown'}</p>
+                        <p>Commit SHA: ${env.GIT_COMMIT_SHA ?: 'Unknown'}</p>
                         <p>Build URL: <a href='${env.BUILD_URL}'>${env.BUILD_URL}</a></p>
+                        <p>SonarQube Report: <a href="https://sonar.yet-kenya.com/dashboard?id=${env.APP_NAME}">View Analysis</a></p>
+                        <p>Image Location: <code>ghcr.io/mikecurious/yet-docs:latest</code></p>
                         """,
                         to: "${env.TEAM_EMAIL}",
                         mimeType: 'text/html'
@@ -112,7 +164,11 @@ pipeline {
                         body: """
                         <p>Build failed: ${env.APP_NAME}</p>
                         <p>Branch: ${env.GIT_BRANCH ?: 'Unknown'}</p>
+                        <p>Commit by: ${env.GIT_AUTHOR ?: 'Unknown'} (${env.GIT_AUTHOR_EMAIL ?: ''})</p>
+                        <p>Commit message: ${env.GIT_COMMIT_MSG ?: 'Unknown'}</p>
+                        <p>Commit SHA: ${env.GIT_COMMIT_SHA ?: 'Unknown'}</p>
                         <p>Build URL: <a href='${env.BUILD_URL}'>${env.BUILD_URL}</a></p>
+                        <p>SonarQube Report: <a href="https://sonar.yet-kenya.com/dashboard?id=${env.APP_NAME}">View Analysis</a></p>
                         """,
                         to: "${env.TEAM_EMAIL}",
                         mimeType: 'text/html'
