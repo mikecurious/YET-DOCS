@@ -1,6 +1,6 @@
 services:
   docs:
-    image: ghcr.io/mikecurious/yet-docs:latest  # Add this line
+    image: ghcr.io/mikecurious/yet-docs:latest  
     build:
       context: .
       dockerfile: Dockerfile
