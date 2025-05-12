@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yet Kenya Merchant API Documentation</title>
+    <title>Yet Kenya Merchant API</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,34 +20,35 @@
             --gray: #6c757d;
             --light-gray: #e9ecef;
             --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
         }
-        
+
         body {
             background-color: #f8f9fb;
             color: var(--dark);
             line-height: 1.7;
             font-size: 16px;
         }
-        
+
         header {
             background-color: var(--dark);
             color: white;
-            padding: 0.5rem 0; /* Reduced from 0.8rem */
+            padding: 0.5rem 0;
+            /* Reduced from 0.8rem */
             text-align: center;
             border-bottom: 5px solid var(--primary);
             position: relative;
             overflow: hidden;
         }
-        
+
         header::before {
             content: "";
             position: absolute;
@@ -54,27 +56,27 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(255,180,0,0.2) 0%, rgba(255,180,0,0) 70%);
+            background: linear-gradient(135deg, rgba(255, 180, 0, 0.2) 0%, rgba(255, 180, 0, 0) 70%);
             z-index: 1;
         }
-        
+
         .header-content {
             position: relative;
             z-index: 2;
         }
-        
+
         .container {
             max-width: 1300px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
         h1 {
             font-size: 2.8rem;
             margin-bottom: 1rem;
             font-weight: 700;
         }
-        
+
         h2 {
             font-size: 2rem;
             margin: 2.5rem 0 1rem;
@@ -83,23 +85,23 @@
             padding-bottom: 0.5rem;
             display: inline-block;
         }
-        
+
         h3 {
             font-size: 1.5rem;
             margin: 1.8rem 0 0.8rem;
             color: var(--dark);
         }
-        
+
         h4 {
             font-size: 1.2rem;
             margin: 1.2rem 0 0.6rem;
             color: var(--dark);
         }
-        
+
         p {
             margin-bottom: 1.2rem;
         }
-        
+
         .intro {
             background-color: white;
             padding: 2.5rem;
@@ -108,7 +110,7 @@
             margin: 2rem 0;
             border-left: 4px solid var(--primary);
         }
-        
+
         .endpoint {
             background-color: white;
             border-radius: var(--border-radius);
@@ -118,12 +120,12 @@
             transition: var(--transition);
             border: 1px solid var(--light-gray);
         }
-        
+
         .endpoint:hover {
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
             transform: translateY(-2px);
         }
-        
+
         .endpoint-header {
             background-color: var(--dark);
             color: white;
@@ -133,7 +135,7 @@
             justify-content: space-between;
             cursor: pointer;
         }
-        
+
         .method {
             background-color: var(--primary);
             color: var(--dark);
@@ -146,11 +148,11 @@
             align-items: center;
             gap: 6px;
         }
-        
+
         .method i {
             font-size: 0.8rem;
         }
-        
+
         .title {
             margin-left: 1rem;
             font-size: 1.1rem;
@@ -158,11 +160,11 @@
             color: var(--light);
             flex-grow: 1;
         }
-        
+
         .endpoint-content {
             padding: 2rem;
         }
-        
+
         .url {
             font-family: 'Consolas', monospace;
             background-color: #f1f3f5;
@@ -175,11 +177,11 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .url-text {
             flex-grow: 1;
         }
-        
+
         .copy-btn {
             background-color: var(--primary);
             color: var(--dark);
@@ -193,11 +195,11 @@
             align-items: center;
             gap: 4px;
         }
-        
+
         .copy-btn:hover {
             background-color: var(--primary-dark);
         }
-        
+
         .description {
             margin-bottom: 1.8rem;
             background-color: #f9f9f9;
@@ -205,15 +207,15 @@
             border-radius: var(--border-radius);
             border-left: 3px solid var(--primary);
         }
-        
+
         .section {
             margin-bottom: 2rem;
         }
-        
+
         .section:last-child {
             margin-bottom: 0;
         }
-        
+
         .section-title {
             font-weight: 600;
             margin-bottom: 0.8rem;
@@ -222,7 +224,7 @@
             align-items: center;
             font-size: 1.1rem;
         }
-        
+
         .section-title:before {
             content: "";
             display: inline-block;
@@ -232,46 +234,46 @@
             margin-right: 10px;
             border-radius: 50%;
         }
-        
+
         .params {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 1.5rem;
             font-size: 0.95rem;
         }
-        
+
         .params th {
             background-color: var(--dark);
             color: white;
             padding: 0.8rem;
             text-align: left;
         }
-        
+
         .params td {
             padding: 0.8rem;
             border-bottom: 1px solid var(--light-gray);
         }
-        
+
         .params tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        
+
         .params tr:hover {
             background-color: #f2f2f2;
         }
-        
+
         .required {
             color: #dc3545;
             font-weight: 500;
             margin-left: 5px;
         }
-        
+
         .optional {
             color: #6c757d;
             font-weight: normal;
             margin-left: 5px;
         }
-        
+
         .code-block {
             background-color: #272822;
             border-radius: var(--border-radius);
@@ -280,7 +282,7 @@
             overflow-x: auto;
             position: relative;
         }
-        
+
         .code-header {
             display: flex;
             justify-content: space-between;
@@ -290,21 +292,21 @@
             border-radius: var(--border-radius) var(--border-radius) 0 0;
             font-size: 0.9rem;
         }
-        
+
         .code-title {
             font-weight: 500;
         }
-        
+
         .code-copy {
             cursor: pointer;
             color: #a6a6a6;
             transition: var(--transition);
         }
-        
+
         .code-copy:hover {
             color: var(--primary);
         }
-        
+
         pre {
             margin: 0;
             white-space: pre-wrap;
@@ -316,14 +318,14 @@
             border-radius: var(--border-radius);
             padding: 1.2rem;
         }
-        
+
         .response-example {
             background-color: #f5f5f5;
             padding: 1.2rem;
             border-radius: var(--border-radius);
             margin: 1.2rem 0;
         }
-        
+
         .nav {
             position: sticky;
             top: 20px;
@@ -335,7 +337,7 @@
             max-height: calc(100vh - 40px);
             overflow-y: auto;
         }
-        
+
         .nav-title {
             font-weight: 600;
             margin-bottom: 1rem;
@@ -344,26 +346,26 @@
             border-bottom: 2px solid var(--primary);
             padding-bottom: 0.5rem;
         }
-        
+
         .nav-list {
             list-style: none;
         }
-        
+
         .nav-category {
             margin-bottom: 1rem;
             font-weight: 500;
         }
-        
+
         .nav-subcategory {
             margin-left: 1rem;
             margin-bottom: 0.8rem;
         }
-        
+
         .nav-item {
             margin-bottom: 0.5rem;
             margin-left: 1.5rem;
         }
-        
+
         .nav-link {
             color: var(--gray);
             text-decoration: none;
@@ -373,48 +375,48 @@
             gap: 5px;
             font-size: 0.9rem;
         }
-        
+
         .nav-link:hover {
             color: var(--primary);
         }
-        
+
         .nav-link.active {
             color: var(--primary-dark);
             font-weight: 500;
         }
-        
+
         .grid {
             display: grid;
             grid-template-columns: 280px 1fr;
             gap: 2rem;
             margin-top: 2rem;
         }
-        
+
         @media (max-width: 992px) {
             .grid {
                 grid-template-columns: 220px 1fr;
             }
         }
-        
+
         @media (max-width: 768px) {
             .grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .nav {
                 position: static;
                 margin-bottom: 2rem;
             }
-            
+
             h1 {
                 font-size: 2.2rem;
             }
-            
+
             h2 {
                 font-size: 1.8rem;
             }
         }
-        
+
         .badge {
             display: inline-block;
             padding: 0.25rem 0.5rem;
@@ -423,27 +425,27 @@
             font-weight: bold;
             margin-right: 0.5rem;
         }
-        
+
         .badge-get {
             background-color: #61affe;
             color: #1a2a3a;
         }
-        
+
         .badge-post {
             background-color: #49cc90;
             color: #1a2a3a;
         }
-        
+
         .badge-put {
             background-color: #fca130;
             color: #1a2a3a;
         }
-        
+
         .badge-delete {
             background-color: #f93e3e;
             color: white;
         }
-        
+
         .tab {
             display: inline-block;
             padding: 0.8rem 1.2rem;
@@ -454,16 +456,16 @@
             transition: var(--transition);
             font-weight: 500;
         }
-        
+
         .tab.active {
             background-color: var(--primary);
             color: var(--dark);
         }
-        
+
         .tab:hover:not(.active) {
             background-color: #d0d0d0;
         }
-        
+
         .tab-content {
             display: none;
             padding: 1.5rem;
@@ -471,23 +473,24 @@
             border-radius: 0 8px 8px 8px;
             border: 1px solid var(--light-gray);
         }
-        
+
         .tab-content.active {
             display: block;
         }
-        
+
         .tabs {
             margin-bottom: 1.5rem;
         }
-        
+
         footer {
             background-color: var(--dark);
             color: white;
             text-align: center;
-            padding: 0.3rem 0; /* Reduced from 0.5rem */
+            padding: 0.3rem 0;
+            /* Reduced from 0.5rem */
             margin-top: 2rem;
         }
-        
+
         .logo {
             font-weight: bold;
             color: var(--primary);
@@ -495,7 +498,7 @@
             margin-bottom: 1rem;
             display: inline-block;
         }
-        
+
         .theme-toggle {
             position: fixed;
             bottom: 2rem;
@@ -510,15 +513,15 @@
             justify-content: center;
             cursor: pointer;
             z-index: 100;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             transition: var(--transition);
         }
-        
+
         .theme-toggle:hover {
-            background-color: var(--primary-dark);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+            background-color: var(--primary-dark);
             transform: scale(1.05);
         }
-        
+
         /* Authentication section */
         .auth-banner {
             background-color: #e9f7ef;
@@ -527,7 +530,7 @@
             margin: 1.5rem 0;
             border-radius: var(--border-radius);
         }
-        
+
         .auth-title {
             font-weight: 600;
             color: #28a745;
@@ -536,7 +539,7 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         /* Quick links */
         .quick-links {
             display: flex;
@@ -544,7 +547,7 @@
             gap: 1rem;
             margin: 2rem 0;
         }
-        
+
         .quick-link {
             padding: 1rem 1.5rem;
             background-color: white;
@@ -558,37 +561,37 @@
             transition: var(--transition);
             font-weight: 500;
         }
-        
+
         .quick-link:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
             color: var(--primary-dark);
         }
-        
+
         .quick-link i {
             color: var(--primary);
             font-size: 1.2rem;
         }
-        
+
         /* Helper classes */
         .text-primary {
             color: var(--primary-dark);
         }
-        
+
         .mt-4 {
             margin-top: 2rem;
         }
-        
+
         .mb-4 {
             margin-bottom: 2rem;
         }
-        
+
         /* Search bar */
         .search-container {
             margin: 2rem 0;
             position: relative;
         }
-        
+
         .search-input {
             width: 100%;
             padding: 0.8rem 1rem 0.8rem 3rem;
@@ -597,13 +600,13 @@
             font-size: 1rem;
             transition: var(--transition);
         }
-        
+
         .search-input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(255,180,0,0.2);
+            box-shadow: 0 0 0 3px rgba(255, 180, 0, 0.2);
         }
-        
+
         .search-icon {
             position: absolute;
             left: 1rem;
@@ -611,25 +614,25 @@
             transform: translateY(-50%);
             color: var(--gray);
         }
-        
+
         /* Method badges */
         .method-get {
             background-color: #61affe;
         }
-        
+
         .method-post {
             background-color: #49cc90;
         }
-        
+
         .method-put {
             background-color: #fca130;
         }
-        
+
         .method-delete {
             background-color: #f93e3e;
             color: white;
         }
-        
+
         /* Status codes */
         .status-code {
             display: inline-block;
@@ -639,22 +642,22 @@
             font-weight: 600;
             margin-right: 0.5rem;
         }
-        
+
         .status-200 {
             background-color: #d4edda;
             color: #155724;
         }
-        
+
         .status-400 {
             background-color: #f8d7da;
             color: #721c24;
         }
-        
+
         .status-500 {
             background-color: #f8d7da;
             color: #721c24;
         }
-        
+
         /* Footer styling */
         .footer-content {
             display: flex;
@@ -662,29 +665,29 @@
             align-items: center;
             gap: 1rem;
         }
-        
+
         .footer-links {
             display: flex;
             gap: 2rem;
             margin: 1rem 0;
         }
-        
+
         .footer-link {
             color: #a6a6a6;
             text-decoration: none;
             transition: var(--transition);
         }
-        
+
         .footer-link:hover {
             color: var(--primary);
         }
-        
+
         .social-links {
             display: flex;
             gap: 1rem;
             margin-top: 1rem;
         }
-        
+
         .social-link {
             display: flex;
             align-items: center;
@@ -697,27 +700,28 @@
             text-decoration: none;
             transition: var(--transition);
         }
-        
+
         .social-link:hover {
             background-color: var(--primary);
             color: var(--dark);
             transform: translateY(-3px);
         }
-        
+
         .param-list {
             padding-left: 1.5rem;
         }
-        
+
         .param-list li {
             margin-bottom: 0.5rem;
         }
-        
+
         .param-list strong {
             font-weight: 600;
         }
     </style>
     <script src="scripts/menu-handler.js" defer></script>
 </head>
+
 <body>
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
@@ -729,13 +733,13 @@
             <p>Robust, secure, and scalable API for mobile money and card payment services</p>
         </div>
     </header>
-    
+
     <div class="container">
         <div class="search-container">
             <i class="fas fa-search search-icon"></i>
             <input type="text" class="search-input" placeholder="Search in documentation..." id="searchInput">
         </div>
-        
+
         <div class="quick-links">
             <a href="#authentication" class="quick-link">
                 <i class="fas fa-key"></i>
@@ -754,37 +758,42 @@
                 Error Handling
             </a>
         </div>
-        
+
         <div class="grid">
             <nav class="nav" id="navBar">
                 <div class="nav-title">API Reference</div>
                 <ul class="nav-list">
                     <li class="nav-category">Getting Started
                         <ul>
-                            <li class="nav-item"><a href="#" id="menu-introduction" class="nav-link"><i class="fas fa-info-circle"></i> Introduction</a></li>
-                            <li class="nav-item"><a href="#" id="menu-authentication" class="nav-link"><i class="fas fa-key"></i> Authentication</a></li>
-                            <li class="nav-item"><a href="#" id="menu-errors" class="nav-link"><i class="fas fa-exclamation-triangle"></i> Error Handling</a></li>
+                            <li class="nav-item"><a href="#" id="menu-introduction" class="nav-link"><i
+                                        class="fas fa-info-circle"></i> Introduction</a></li>
+                            <li class="nav-item"><a href="#" id="menu-authentication" class="nav-link"><i
+                                        class="fas fa-key"></i> Authentication</a></li>
+                            <li class="nav-item"><a href="#" id="menu-errors" class="nav-link"><i
+                                        class="fas fa-exclamation-triangle"></i> Error Handling</a></li>
                         </ul>
                     </li>
                     <li class="nav-category">Card Payments
                         <ul>
-                            <li class="nav-item"><a href="#" id="menu-card-payments" class="nav-link"><i class="fas fa-credit-card"></i> Card Payments</a></li>
+                            <li class="nav-item"><a href="#" id="menu-card-payments" class="nav-link"><i
+                                        class="fas fa-credit-card"></i> Card Payments</a></li>
                         </ul>
                     </li>
                     <li class="nav-category">Mobile Payments
                         <ul>
-                            <li class="nav-item"><a href="#" id="menu-mobile-payments" class="nav-link"><i class="fas fa-mobile-alt"></i> Mobile Payments</a></li>
+                            <li class="nav-item"><a href="#" id="menu-mobile-payments" class="nav-link"><i
+                                        class="fas fa-mobile-alt"></i> Mobile Payments</a></li>
                         </ul>
                     </li>
                 </ul>
             </nav>
-            
+
             <main id="main-content">
                 <!-- Content will be dynamically loaded here -->
             </main>
         </div>
     </div>
-    
+
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -793,9 +802,12 @@
                     <a href="mailto:support@hudumacitypay.com" class="footer-link">Support</a>
                 </div>
                 <div class="social-links">
-                    <a href="https://www.tiktok.com/@young.eagles.of.t?_t=ZM-8v77VXuuDf4&_r=1" class="social-link" target="_blank"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://m.facebook.com/profile.php?id=61556213772956" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/yetkenyalimited/profilecard/?igsh=aXkzMWdoMzN6bjJ2" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@young.eagles.of.t?_t=ZM-8v77VXuuDf4&_r=1" class="social-link"
+                        target="_blank"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://m.facebook.com/profile.php?id=61556213772956" class="social-link"
+                        target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/yetkenyalimited/profilecard/?igsh=aXkzMWdoMzN6bjJ2"
+                        class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://yet-kenya.com" class="social-link" target="_blank"><i class="fas fa-globe"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                 </div>
@@ -809,7 +821,8 @@
     </div>
 
     <script>
-       
+
     </script>
 </body>
+
 </html>
